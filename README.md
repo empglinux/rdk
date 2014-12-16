@@ -15,20 +15,20 @@ RDK is an open source framework, it includes two parts.
 
 ## How to compile
 
-Compile needs root privilege: 
-#su root
+  Compile needs root privilege: 
+  su root
 
 * Compile driver
 	under driver directory:
-	#make
-	#depmod -a
+	make
+	depmod -a
 
 * Compile application
 	under application directory:
-	#./autogen.sh
-	#make install
+	./autogen.sh
+	make install
 
-Finally : #reboot
+Finally : reboot
  
 ## License
 
