@@ -2,7 +2,7 @@
 
  * Copyright (c) 2009-2014, Intel Corporation.
  
-##Overview
+## Overview
 
 RDK is an open source framework, it includes two parts.
 * User space demon application, it takes actions according to the data that get from its driver.
@@ -15,11 +15,11 @@ RDK is an open source framework, it includes two parts.
 
 ## How to compile
 
-  Compile needs root privilege: 
-  $su root
+  Compile needs root privilege:   
+	$su root
 
 * Compile driver
-	under driver directory:  
+	under driver directory:
 	$make  
 	$depmod -a  
 
