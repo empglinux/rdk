@@ -7,6 +7,11 @@
 RDK is an open source framework, it includes two parts.
 * User space demon application, it takes actions according to the data that get from its driver.
 * Hardware drivers, it offers data to user space application and manages hardware.
+     
+ Support Intel Education Platforms:     
+ * Stone Point, Buck Point, Beach Point, Match Point, Marble Point         
+ Support Linux OS:       
+ * Debian7, Ubuntu     
 
 ## Dependencies
 
@@ -18,13 +23,11 @@ RDK is an open source framework, it includes two parts.
   Compile needs root privilege:   
 	$su root
 
-* Compile driver
-	under driver directory:    
+* Compile driver under driver directory:    
 	$make      
 	$depmod -a     
 
-* Compile application    
-	under application directory:      
+* Compile application under application directory:      
 	$./autogen.sh     
 	$make install     
 
