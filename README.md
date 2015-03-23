@@ -17,6 +17,8 @@ RDK is an open source framework, it includes two parts.
 
  * libgtk2.0-dev  (gtk+ develop library)
  * libxtst-dev	(x11 testing library)
+ * libdbus-1-dev	(dbus library)
+ * libdbus-glib-1-dev	(dbus-glib library)
 
 ## How to compile
 
@@ -25,11 +27,14 @@ RDK is an open source framework, it includes two parts.
 
 * Compile driver under driver directory:    
 	$make      
-	$depmod -a     
 
-* Compile application under application directory:      
+* Compile functionkeys under functionkeys directory:      
 	$./autogen.sh     
 	$make install     
+
+* Compile sensord under sensord directory:      
+	$make
+	$make install
 
 Finally :    
 	$reboot     
