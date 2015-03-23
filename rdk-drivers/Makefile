@@ -16,12 +16,15 @@ VKD_DIR:=$(ROOT_DRV_DIR)/vkd
 ACCEL_DIR:=$(ROOT_DRV_DIR)/accel
 ISCM_DIR:=$(ROOT_DRV_DIR)/iscm
 PM_DIR:=$(ROOT_DRV_DIR)/pm
+TABLET_DIR:=$(ROOT_DRV_DIR)/tablet
 
 RDK_DRIVERS_VER=1.0.1
 
-all: accel cmpc_pm cmpc_vkd iscm
+all: accel cmpc_pm cmpc_vkd iscm tablet
 	@echo ">>>>>>>>>>> function key drivers install completely. <<<<<<<<<<<<"
+	@echo ">>>>>>>>>>> please run command 'depmod -a' to enable drivers and restart. <<<<<<<<<<<<"
 	@rm -f ${CONFLITDRV} if [ -f ${CONFLITDRV} ]
+	@depmod -a
 
 ${ACCEL_DIR}/accel.ko:
 	$(MAKE) -f ${ACCEL_DIR}/Makefile -C ${ACCEL_DIR} KDIR=${KDIR}
@@ -31,6 +34,8 @@ ${VKD_DIR}/cmpc_vkd.ko:
 	$(MAKE) -f ${VKD_DIR}/Makefile -C ${VKD_DIR} KDIR=${KDIR}
 ${ISCM_DIR}/iscm.ko:
 	$(MAKE) -C $(ISCM_DIR) KDIR=$(KDIR)
+${TABLET_DIR}/tablet.ko:
+	$(MAKE) -f ${TABLET_DIR}/Makefile -C ${TABLET_DIR} KDIR=${KDIR}
 
 accel:  ${ACCEL_DIR}/accel.ko
 	@install -d ${DESTDIR}${MODULE_DIR}
@@ -48,6 +53,10 @@ iscm: ${ISCM_DIR}/iscm.ko
 	@install -d ${DESTDIR}${MODULE_DIR}
 	@install -m 644 $< ${DESTDIR}${MODULE_DIR}
 
+tablet: ${TABLET_DIR}/tablet.ko
+	@install -d ${DESTDIR}${MODULE_DIR}
+	@install -m 644 $< ${DESTDIR}${MODULE_DIR}
+
 #fnkey_drivers_install: accel cmpc_pm cmpc_vkd
 
 uninstall:
@@ -56,6 +65,8 @@ uninstall:
 	@$(shell [ -f ${MODULE_DIR}/cmpc_vkd.ko ] && rm -f ${MODULE_DIR}/cmpc_vkd.ko)
 	@$(shell [ -f ${MODULE_DIR}/cmpc_pm.ko ] && rm -f ${MODULE_DIR}/cmpc_pm.ko)
 	@$(shell [ -f ${MODULE_DIR}/iscm.ko ] && rm -f ${MODULE_DIR}/iscm.ko)
+	@$(shell [ -f ${MODULE_DIR}/tablet.ko ] && rm -f ${MODULE_DIR}/tablet.ko)
+	@echo "function key drivers have been uninstalled."
 
 dist-bzip2: ${ACCEL_DIR} ${PM_DIR} ${VKD_DIR}
 	@make -C ${ACCEL_DIR} clean 
@@ -77,5 +88,6 @@ clean:
 	@make -C ${PM_DIR} clean 
 	@make -C ${VKD_DIR} clean 
 	@make -C ${ISCM_DIR} clean 
+	@make -C ${TABLET_DIR} clean 
 
-.PHONY: accel cmpc_pm cmpc_vkd iscm fnkey_drivers_install dist-bzip2 clean
+.PHONY: accel cmpc_pm cmpc_vkd iscm tablet fnkey_drivers_install dist-bzip2 clean
