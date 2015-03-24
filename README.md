@@ -23,7 +23,7 @@ RDK is an open source framework, it includes two parts.
 ## How to compile
 
   Compile needs root privilege:   
-	$su root
+	$su root          
 
 * Compile driver under driver directory:    
 	$make      
@@ -33,8 +33,8 @@ RDK is an open source framework, it includes two parts.
 	$make install     
 
 * Compile sensord under sensord directory:      
-	$make
-	$make install
+	$make         
+	$make install        
 
 Finally :    
 	$reboot     

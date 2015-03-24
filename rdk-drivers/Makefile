@@ -22,7 +22,6 @@ RDK_DRIVERS_VER=1.0.1
 
 all: accel cmpc_pm cmpc_vkd iscm tablet
 	@echo ">>>>>>>>>>> function key drivers install completely. <<<<<<<<<<<<"
-	@echo ">>>>>>>>>>> please run command 'depmod -a' to enable drivers and restart. <<<<<<<<<<<<"
 	@rm -f ${CONFLITDRV} if [ -f ${CONFLITDRV} ]
 	@depmod -a
 
