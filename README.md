@@ -15,6 +15,7 @@ RDK is an open source framework, it includes two parts.
 
 ## Dependencies
 
+ * git	(tool for download RDK code)
  * libgtk2.0-dev  (gtk+ develop library)
  * libxtst-dev	(x11 testing library)
  * libdbus-1-dev	(dbus library)
