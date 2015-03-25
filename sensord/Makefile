@@ -21,8 +21,9 @@ SRCS = $(wildcard *.c)
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
 CFLAGS = -Wall -O2
-INCLUDES = -I./include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include
-LIBS += -lpthread -laccel -ltablet -lglib-2.0
+INCLUDES = -I./include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include \
+	-I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/dbus-1.0
+LIBS += -lpthread -laccel -ltablet -lglib-2.0 -ldbus-1 -ldbus-glib-1
 LDFLAGS += -L./libs
 LDFLAGS += $(LIBS)
 

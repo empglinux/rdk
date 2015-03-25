@@ -59,7 +59,7 @@ static void sd_send_dbus_signal(int *dir)
 
 	mess = dbus_message_new_signal(SENSORD_DBUS_SYNC_OBJ, SENSORD_DBUS_SYNC_INTERFACE, SENSORD_DBUS_SYNC_ROTATION_SIGNAL);
 	dbus_message_append_args(mess, DBUS_TYPE_INT32, dir, DBUS_TYPE_INVALID);
-	dbus_connection_send(bus, mess, NULL);
+	dbus_connection_send(dbus, mess, NULL);
 	dbus_message_unref(mess);
 }
 
