@@ -21,7 +21,7 @@ TABLET_DIR:=$(ROOT_DRV_DIR)/tablet
 RDK_DRIVERS_VER=1.0.1
 
 all: accel cmpc_pm cmpc_vkd iscm tablet
-	@echo ">>>>>>>>>>> function key drivers install completely. <<<<<<<<<<<<"
+	@echo ">>>>>>>>>>> rdk drivers install completely. <<<<<<<<<<<<"
 	@rm -f ${CONFLITDRV} if [ -f ${CONFLITDRV} ]
 	@depmod -a
 

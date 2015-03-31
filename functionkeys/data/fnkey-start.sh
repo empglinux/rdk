@@ -10,5 +10,6 @@ rm -f /var/lock/fnkey &> /dev/null
 
 ## fnkey login begin ##
 /usr/bin/fnkey &>/dev/null
+sleep 1
 ## fnkey login end ##
 
