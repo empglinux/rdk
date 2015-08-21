@@ -18,6 +18,9 @@
 #include <linux/cdev.h>
 #include <linux/delay.h>
 #include <linux/types.h>
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,16,0)
+#include <linux/acpi.h>
+#endif
 #include <linux/fs.h>
 #include <linux/interrupt.h>
 #include <acpi/acpi_drivers.h>

@@ -18,6 +18,9 @@
 #include <linux/fs.h>
 #include <linux/ioctl.h>
 #include <linux/cdev.h>
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,16,0)
+#include <linux/acpi.h>
+#endif
 
 #include <asm/uaccess.h>
 
