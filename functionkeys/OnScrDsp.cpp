@@ -119,7 +119,9 @@ OnScrDsp::OnScrDsp()
 
 	for (i = 0; i <= WND_WRL; i++) {
 		m_pWnd[i] = gtk_window_new(GTK_WINDOW_POPUP);
+#if 0
 		assert(m_pWnd[i]);
+#endif
 	}
 
 	SetWnd(&m_pWnd[WND_BRG], GCallback(BrgExp), WDT_VLM, HGH_VLM, VLM_X, VLM_Y);

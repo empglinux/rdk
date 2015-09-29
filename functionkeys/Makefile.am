@@ -7,6 +7,7 @@ fnkey_LDADD=${LDADD}
 #wlan key is 139 with the scope of the marco CDV
 #DEFS=-DCDV -DDEBUG
 DEFS=-DCDV
+LDADD+=-lX11
 
 include_HEADERS=button.h cmpc_pm.h OnScrDsp.h
 fnkey_SOURCES=fnkey.cpp OnScrDsp.cpp 
