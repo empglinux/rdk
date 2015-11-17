@@ -1,0 +1,8 @@
+Package: sensord
+Version: 2.0.5
+Maintainer: Intel
+Section: x11
+Priority: optional
+Architecture: amd64
+Description: Classmate PC sensord package
+	This package is used for Debian8 on CMPC Golden Creek which is based on Intel Atom.

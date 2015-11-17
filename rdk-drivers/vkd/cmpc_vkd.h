@@ -20,13 +20,14 @@
 #include <linux/version.h>
 #include <linux/cdev.h>
 #include <linux/types.h>
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(3,16,0)
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 19, 0)
 #include <linux/acpi.h>
 #endif
+
 #include <linux/fs.h>
 #include <linux/wait.h>
 #include <linux/interrupt.h>
-
 #include <acpi/acpi_drivers.h>
 #include <asm/uaccess.h>
 

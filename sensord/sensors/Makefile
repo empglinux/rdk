@@ -7,7 +7,7 @@
 ######################################################### 
 
 
-SRC_FOLDERS = accel tablet
+SRC_FOLDERS = accel acld
 
 .PHONY: all debug clean install
 

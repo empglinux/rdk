@@ -14,7 +14,7 @@ LIBS_DIR = ../../libs
 
 SRC = $(wildcard ./*.c)
 OBJ = $(patsubst %.c, %.o, $(SRC))
-OBJ_SO = libaccel.so
+OBJ_SO = libacld.so
 
 
 .PHONY: all debug clean install 

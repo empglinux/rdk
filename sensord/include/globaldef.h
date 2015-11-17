@@ -21,15 +21,22 @@
 #define RET_NODATA	(-2)
 
 /* accel g-select value */
+#if 0
 #define ACCEL_G_SELECT_1P5G 0
 #define ACCEL_G_SELECT_6G 1
 #define ACCEL_G_SELECT_2G 0
 #define ACCEL_G_SELECT_4G 1
 #define ACCEL_G_SELECT_8G 2
 #define ACCEL_G_SELECT_16G 3
+#else
+#define ACCEL_G_SELECT_DEFAULT		3
+#define ACCEL_G_SELECT_5G		5
+#define ACCEL_G_SELECT_8G		8
+#define ACCEL_G_SELECT_12G		12
+#endif
 
 #define ACCEL_SAMPLE_INTERVAL		500
-#define TABLET_SAMPLE_INTERVAL		500
+#define TABLET_SAMPLE_INTERVAL		300
 
 #define ORIENTATION_SHRESHOLD		2
 #define GRAVITY_MEASUREMENT_1P5G	62

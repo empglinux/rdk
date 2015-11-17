@@ -28,6 +28,7 @@
 #include "globaldef.h"
 
 #define ACCEL_DEV_PATH		"/proc/acpi/accel"
+#define ACLD_DEV_PATH		"/proc/acpi/acld"
 
 /**
  * Acceleration data of x, y and z axes used in driver.
@@ -60,6 +61,29 @@ int accel_get_g_select(int fd, int *select);
 /* accel read */
 int accel_read(int fd, struct accel_raw_data *raw);
 
+/* open acld device */
+int acld_opendev();
+
+/* acld start */
+int acld_start(int fd);
+
+/* acld stop */
+int acld_stop(int fd);
+
+/* acld set sense */
+int acld_set_sense(int fd, int sense);
+
+/* acld set g_select */
+int acld_set_g_select(int fd, int select);
+
+/* acld get g_select */
+int acld_get_g_select(int fd, int *select);
+
+/* acld read */
+int acld_read(int fd, struct accel_raw_data *raw);
+
+/* acld set keyboard */
+int acld_setkb(int fd, int flag);
 
 /**
  * To define IOCTL
@@ -92,5 +116,11 @@ int accel_read(int fd, struct accel_raw_data *raw);
  */
 #define IOCTL_ACCEL_GET_G_SELECT \
 	_IOR(ACCEL_MAGIC_NUMBER, 0x05, int)
+
+/**
+ * IOCTL to set keyboard. Enable is 0, Disable is 1.
+ */
+#define IOCTL_ACCEL_KBSET \
+	_IOW(ACCEL_MAGIC_NUMBER, 0xc, int)
 
 #endif

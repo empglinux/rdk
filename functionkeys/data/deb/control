@@ -1,9 +1,0 @@
-Package: function-keys-0.3.0
-Version: 20121119
-Maintainer: Intel
-Section: x11
-Priority: optional
-Architecture: i386
-Depends: rfkill
-Description: Classmate PC function key package
-	This package is used for Debian Wheezy Beta3 on CMPC which is based on Intel Atom.

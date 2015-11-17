@@ -31,7 +31,10 @@
 #include "accelio.h"
 
 #define CMPC_CLASS_NAME    "cmpc"
-#define ACCEL_NAME         "accel"
+#define ACCEL_NAME         "acld"
+
+/* Keyboard disable/enable method name */
+#define ACCEL_KB_METHOD   "KBCN"
 
 /* Accelerometer AML method name */
 #define ACCEL_AML_METHOD   "ACMD"
@@ -126,6 +129,8 @@ acpi_status accel_aml_set_g_offset(struct accel_raw_data *data);
 acpi_status accel_aml_set_g_activity_thresh(int select);
 acpi_status accel_aml_set_g_freefall_thresh(int select);
 
+/* CMPC accel Keyboard command */
+acpi_status accel_kb_control(int flag);
 
 /* Accelerometer device struct */
 struct accel_device {
@@ -430,6 +435,14 @@ static int accel_ioctl(struct inode *inode, struct file *file, unsigned int cmd,
 		}
 		break;
 
+	case IOCTL_ACCEL_KBCONTROL:
+		/* enable or disable keyboard */
+		if (!ACPI_SUCCESS(accel_kb_control(arg))) {
+			dbg_print("set keyboard status: %d\n", arg);
+			return -EFAULT;
+		}
+		break;
+
 	default:
 		dbg_print("invalid ioctl commands\n");
 		return -ENOTTY;
@@ -481,7 +494,7 @@ static ssize_t accel_read(struct file *file, char __user *buf, size_t size, loff
 
 static void accel_handler(acpi_handle handle, u32 event, void *data)
 {
-	dbg_print("accel handler----->event : %x\n", event);
+//	dbg_print("accel handler----->event : %x\n", event);
 
 	switch (event) {
 	case ACCEL_NOTIFY:
@@ -489,7 +502,7 @@ static void accel_handler(acpi_handle handle, u32 event, void *data)
 		wake_up_interruptible(&adev->waitq);
 		break;
 	case ACCEL_FREEFALL:
-		dbg_print("accel freefall event happen.\n");
+		dbg_print("ACCEL freefall\n");
 		adev->freefall_wf = 1;
 		adev->freefall = 1;
 		wake_up_interruptible(&adev->freefall_wq);
@@ -499,7 +512,7 @@ static void accel_handler(acpi_handle handle, u32 event, void *data)
 		break;
 	}
 
-	dbg_print("<-----\n");
+//	dbg_print("<-----\n");
 }
 
 
@@ -683,6 +696,32 @@ static int accel_resume(struct device *dev)
 	return 0;
 }
 
+/**
+ * Call KB method to enable/disable keyboard.
+ *
+ * @return	ACPI_SUCCESS if success; other values if error
+ */
+acpi_status accel_kb_control(int flag)
+{
+	struct acpi_object_list params;
+	union acpi_object in_obj[4];
+
+	dbg_print("-----> set keyboard status: %d\n", flag);
+	params.count = 4;
+	params.pointer = &in_obj[0];
+	in_obj[0].integer.value = flag;
+	in_obj[0].type = ACPI_TYPE_INTEGER;
+	in_obj[1].integer.value = 0;
+	in_obj[1].type = ACPI_TYPE_INTEGER;
+	in_obj[2].integer.value = 0;
+	in_obj[2].type = ACPI_TYPE_INTEGER;
+	in_obj[3].integer.value = 0;
+	in_obj[3].type = ACPI_TYPE_INTEGER;
+	dbg_print("<-----\n");
+
+	return acpi_evaluate_object(adev->device->handle, ACCEL_KB_METHOD,
+		&params, NULL);
+}
 
 /**
  * Call AML method to start accelerometer.
@@ -903,7 +942,7 @@ acpi_status accel_aml_set_g_offset(struct accel_raw_data *data)
 
 
 static const struct acpi_device_id adevice_ids[] = {
-	{"ACDK0000", 0},
+	{"ACLD0000", 0},
 	{"", 0},
 };
 
@@ -958,7 +997,7 @@ static void __exit accel_exit(void)
 module_init(accel_init);
 module_exit(accel_exit);
 
-ACPI_MODULE_NAME("accel");
-MODULE_DESCRIPTION("CMPC Accelerometer Driver");
+ACPI_MODULE_NAME("acld");
+MODULE_DESCRIPTION("CMPC Gsensor Lid ACPI Driver");
 MODULE_VERSION("1.0.0.0");
 MODULE_LICENSE("GPL");

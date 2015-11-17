@@ -7,7 +7,7 @@
 ######################################################### 
 
 
-CC = gcc
+CC = g++
 
 SRC_FOLDERS = sensors
 
@@ -16,19 +16,19 @@ OBJ_DIR = obj
 CONFFILE = conf/sensord_start.sh
 LIBS_DIR = libs
 
+VERSION = 2.0.5
 
-SRCS = $(wildcard *.c)
-OBJS = $(patsubst %.c, %.o, $(SRCS))
+SRCS = $(wildcard *.cpp)
+OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 
 CFLAGS = -Wall -O2
-INCLUDES = -I./include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include \
-	-I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -I/usr/include/dbus-1.0
-LIBS += -lpthread -laccel -ltablet -lglib-2.0 -ldbus-1 -ldbus-glib-1
+INCLUDES = -I./include -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+LIBS += -lpthread -laccel -lacld -l360_angle_cal
 LDFLAGS += -L./libs
 LDFLAGS += $(LIBS)
 
 
-.PHONY: all debug clean install deb
+.PHONY: all debug clean install uninstall deb
 
 
 ## build all
@@ -74,6 +74,15 @@ install:
 	@ldconfig
 	@cp -af $(CONFFILE) /etc/profile.d/
 
+## for uninstall
+uninstall:
+	@rm -f /usr/bin/sensord
+	@rm -f /usr/lib/libaccel.so	
+	@rm -f /usr/lib/libacld.so	
+	@rm -f /usr/lib/lib360_angle_cal.so	
+	@ldconfig
+	@rm -f /etc/profile.d/sensord_start.sh
+
 ## for clean up
 clean:
 	@for subdir in ${SRC_FOLDERS}; do \
@@ -84,9 +93,14 @@ clean:
 			echo -e "\033[30;31m	No $$subdir folder ... \033[0m"; \
 		fi \
 	done
-	@rm -rf $(TARGET) $(OBJS) $(LIBS_DIR)
+	@rm -rf $(TARGET) $(OBJS)
+	@rm -f *.deb
 
 ## for generate debian package
 deb:
-	@echo "hahahahhahahah......"
+	@echo "debian package generating......"
+	@rm -f *.deb
+	@cp $(TARGET) debpackage/usr/bin/
+	@cp $(LIBS_DIR)/*.so debpackage/usr/lib/
+	@dpkg -b debpackage sensord-gc_v$(VERSION).deb
 

@@ -96,5 +96,10 @@ struct accel_raw_data {
 */
 #define IOCTL_ACCEL_RESUME \
 	_IOR(ACCEL_MAGIC_NUMBER, 0xb,int)
+/**
+ * IOCTL to set keyboard status
+*/
+#define IOCTL_ACCEL_KBCONTROL \
+	_IOW(ACCEL_MAGIC_NUMBER, 0xc,int)
 
 #endif /* ACCELIO_H */
