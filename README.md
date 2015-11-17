@@ -1,6 +1,6 @@
 # RDK - Referenced Development Kit
 
- * Copyright (c) 2009-2014, Intel Corporation.
+ * Copyright (c) 2009-2015, Intel Corporation.
  
 ## Overview
 
@@ -9,33 +9,27 @@ RDK is an open source framework, it includes two parts.
 * Hardware drivers, it offers data to user space application and manages hardware.
      
  Support Intel Education Platforms:     
- * Stone Point, Buck Point, Beach Point, Match Point, Marble Point         
+ * Golden Creek         
  Support Linux OS:       
- * Debian7, Ubuntu     
+ * Debian8.1     
 
 ## Dependencies
 
- * git	(tool for download RDK code)
- * libgtk2.0-dev  (gtk+ develop library)
- * libxtst-dev	(x11 testing library)
- * libdbus-1-dev	(dbus library)
- * libdbus-glib-1-dev	(dbus-glib library)
+ * git	(tool for download RDK code)	    
+ 
 
 ## How to compile
 
   Compile needs root privilege:   
 	$su root          
 
-* Compile driver under driver directory:    
-	$make      
-
-* Compile functionkeys under functionkeys directory:      
-	$./autogen.sh     
-	$make install     
-
-* Compile sensord under sensord directory:      
+* Compile drivers under driver directory (rdk-drivers) :       
+	$make   		   
+         
+* Compile sensord under sensord directory (sensord):      
 	$make         
-	$make install        
+	$make install
+	$make deb	( optional: will generate deb install package. )	    
 
 Finally :    
 	$reboot     
