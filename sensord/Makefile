@@ -102,6 +102,7 @@ deb:
 	@rm -f *.deb
 	@chmod 755 debpackage/DEBIAN/post*
 	@cp $(TARGET) debpackage/usr/bin/
+	@chmod 755 debpackage/usr/bin/*
 	@cp $(LIBS_DIR)/*.so debpackage/usr/lib/
 	@dpkg -b debpackage sensord-gc_v$(VERSION).deb
 
